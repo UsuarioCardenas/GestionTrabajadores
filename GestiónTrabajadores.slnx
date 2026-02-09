@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/GestiónTrabajadores.Domain/GestiónTrabajadores.Domain.csproj" Id="53fd8158-3413-45ec-abfc-65f93089818a" />
+  </Folder>
+</Solution>
