@@ -41,4 +41,32 @@ public partial class Index
             _loading = false;
         }
     }
+
+    async Task OpenCreateDialog()
+    {
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true
+        };
+
+        var dialog = await DialogService.ShowAsync<CreateDialog>("Nuevo Trabajador", options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            await LoadTrabajadores();
+        }
+    }
+
+    async Task OpenEditDialog(TrabajadorDto trabajador)
+    {
+        await Task.CompletedTask;
+    }
+
+    async Task OpenDeleteDialog(TrabajadorDto trabajador)
+    {
+        await Task.CompletedTask;
+    }
 }
