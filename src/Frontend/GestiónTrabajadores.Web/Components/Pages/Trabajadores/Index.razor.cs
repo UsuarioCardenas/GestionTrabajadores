@@ -18,6 +18,14 @@ public partial class Index
 
     List<TrabajadorDto> _trabajadores = new();
     bool _loading = false;
+    string _filtroSexo = "Todos";
+
+    IEnumerable<TrabajadorDto> _trabajadoresFiltrados => _filtroSexo switch
+    {
+        "M" => _trabajadores.Where(t => t.Sexo == 'M'),
+        "F" => _trabajadores.Where(t => t.Sexo == 'F'),
+        _ => _trabajadores
+    };
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,6 +50,11 @@ public partial class Index
         }
     }
 
+    void OnFiltroSexoChanged(string value)
+    {
+        _filtroSexo = value;
+    }
+
     async Task OpenCreateDialog()
     {
         var options = new DialogOptions
@@ -63,9 +76,9 @@ public partial class Index
     async Task OpenEditDialog(TrabajadorDto trabajador)
     {
         var parameters = new DialogParameters<EditDialog>
-    {
-        { x => x.TrabajadorId, trabajador.IdTrabajador }
-    };
+        {
+            { x => x.TrabajadorId, trabajador.IdTrabajador }
+        };
 
         var options = new DialogOptions
         {
@@ -86,9 +99,9 @@ public partial class Index
     async Task OpenDeleteDialog(TrabajadorDto trabajador)
     {
         var parameters = new DialogParameters<DeleteDialog>
-    {
-        { x => x.Trabajador, trabajador }
-    };
+        {
+            { x => x.Trabajador, trabajador }
+        };
 
         var options = new DialogOptions
         {

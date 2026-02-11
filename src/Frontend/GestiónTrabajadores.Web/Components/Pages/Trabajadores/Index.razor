@@ -9,15 +9,28 @@
 <MudPaper Class="pa-4" Elevation="3">
     <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4">
         <MudText Typo="Typo.h6" Style="color: #000000; font-weight: 500;">Lista de Trabajadores</MudText>
-        <MudButton Variant="Variant.Filled"
-                   Color="Color.Success"
-                   StartIcon="@Icons.Material.Filled.Add"
-                   OnClick="OpenCreateDialog">
-            Nuevo Trabajador
-        </MudButton>
+        <MudStack Row="true" Spacing="2">
+            <MudSelect T="string"
+                       Value="@_filtroSexo"
+                       ValueChanged="@OnFiltroSexoChanged"
+                       Variant="Variant.Outlined"
+                       Dense="true"
+                       Margin="Margin.Dense"
+                       Style="min-width: 120px;">
+                <MudSelectItem Value="@("Todos")">Todos</MudSelectItem>
+                <MudSelectItem Value="@("M")">Masculino</MudSelectItem>
+                <MudSelectItem Value="@("F")">Femenino</MudSelectItem>
+            </MudSelect>
+            <MudButton Variant="Variant.Filled"
+                       Color="Color.Success"
+                       StartIcon="@Icons.Material.Filled.Add"
+                       OnClick="OpenCreateDialog">
+                Nuevo Trabajador
+            </MudButton>
+        </MudStack>
     </MudStack>
 
-    <MudTable Items="@_trabajadores"
+    <MudTable Items="@_trabajadoresFiltrados"
               Dense="true"
               Hover="true"
               Loading="@_loading"
