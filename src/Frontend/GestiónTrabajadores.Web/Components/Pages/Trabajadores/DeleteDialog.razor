@@ -1,0 +1,48 @@
+﻿@using GestiónTrabajadores.Application.DTOs
+
+<MudDialog>
+    <DialogContent>
+        <MudText Typo="Typo.body1" Class="mb-3">
+            ¿Está seguro de eliminar el registro?
+        </MudText>
+
+        <MudPaper Class="pa-3" Elevation="0" Outlined="true">
+            <MudText Typo="Typo.subtitle1" Style="font-weight: 600;" GutterBottom="true">
+                @Trabajador?.NombreCompleto
+            </MudText>
+            <MudDivider Class="my-2" />
+            <MudText Typo="Typo.body2">
+                <strong>Documento:</strong> @Trabajador?.TipoDocumento - @Trabajador?.NumeroDocumento
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <strong>Fecha de Nacimiento:</strong> @Trabajador?.FechaNacimiento.ToString("dd/MM/yyyy")
+            </MudText>
+            @if (!string.IsNullOrWhiteSpace(Trabajador?.Direccion))
+            {
+                <MudText Typo="Typo.body2">
+                    <strong>Dirección:</strong> @Trabajador.Direccion
+                </MudText>
+            }
+        </MudPaper>
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Cancel" Size="Size.Small">Cancelar</MudButton>
+        <MudButton OnClick="Confirm"
+                   Variant="Variant.Filled"
+                   Color="Color.Error"
+                   Size="Size.Small"
+                   Disabled="@_deleting">
+            @if (_deleting)
+            {
+                <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-1" />
+                <span>Eliminando...</span>
+            }
+            else
+            {
+                <MudIcon Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Class="mr-1" />
+                <span>Eliminar</span>
+            }
+        </MudButton>
+    </DialogActions>
+</MudDialog>

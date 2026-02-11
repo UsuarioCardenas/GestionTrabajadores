@@ -85,6 +85,23 @@ public partial class Index
 
     async Task OpenDeleteDialog(TrabajadorDto trabajador)
     {
-        await Task.CompletedTask;
+        var parameters = new DialogParameters<DeleteDialog>
+    {
+        { x => x.Trabajador, trabajador }
+    };
+
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Small
+        };
+
+        var dialog = await DialogService.ShowAsync<DeleteDialog>("Confirmar Eliminación", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            await LoadTrabajadores();
+        }
     }
 }
