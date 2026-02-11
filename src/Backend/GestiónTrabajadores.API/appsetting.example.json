@@ -1,0 +1,12 @@
+{
+  "ConnectionStrings": {
+    "TrabajadoresConnection": "Server=TU_SERVIDOR;Database=TrabajadoresPrueba;Trusted_Connection=True;TrustServerCertificate=True;"
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*"
+}

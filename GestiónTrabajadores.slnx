@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/src/" />
   <Folder Name="/src/Backend/">
+    <Project Path="src/Backend/GestiónTrabajadores.API/GestiónTrabajadores.API.csproj" Id="68fe6473-a992-4662-8956-0334b61f2a92" />
     <Project Path="src/Backend/GestiónTrabajadores.Application/GestiónTrabajadores.Application.csproj" Id="3a8e8709-c677-4965-a42d-a00565a02f13" />
     <Project Path="src/Backend/GestiónTrabajadores.Domain/GestiónTrabajadores.Domain.csproj" Id="53fd8158-3413-45ec-abfc-65f93089818a" />
     <Project Path="src/Backend/GestiónTrabajadores.Infrastructure/GestiónTrabajadores.Infrastructure.csproj" Id="56288c90-9b25-4223-81bf-7cb9876f826b" />
