@@ -62,7 +62,25 @@ public partial class Index
 
     async Task OpenEditDialog(TrabajadorDto trabajador)
     {
-        await Task.CompletedTask;
+        var parameters = new DialogParameters<EditDialog>
+    {
+        { x => x.TrabajadorId, trabajador.IdTrabajador }
+    };
+
+        var options = new DialogOptions
+        {
+            CloseOnEscapeKey = true,
+            MaxWidth = MaxWidth.Medium,
+            FullWidth = true
+        };
+
+        var dialog = await DialogService.ShowAsync<EditDialog>("Editar Trabajador", parameters, options);
+        var result = await dialog.Result;
+
+        if (result != null && !result.Canceled)
+        {
+            await LoadTrabajadores();
+        }
     }
 
     async Task OpenDeleteDialog(TrabajadorDto trabajador)

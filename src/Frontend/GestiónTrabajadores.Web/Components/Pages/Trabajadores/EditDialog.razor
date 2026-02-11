@@ -1,0 +1,109 @@
+﻿@using GestiónTrabajadores.Application.DTOs
+
+<MudDialog>
+    <DialogContent>
+        @if (_loading)
+        {
+            <div class="d-flex justify-center align-center pa-4">
+                <MudProgressCircular Color="Color.Primary" Size="Size.Large" Indeterminate="true" />
+            </div>
+        }
+        else if (_model != null)
+        {
+            <MudForm @ref="_form" @bind-IsValid="@_formIsValid">
+                <MudGrid Spacing="2">
+                    <MudItem xs="12" sm="6">
+                        <MudTextField @bind-Value="_model.Nombres"
+                                      Label="Nombres"
+                                      Required="true"
+                                      RequiredError="Los nombres son obligatorios"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense" />
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudTextField @bind-Value="_model.Apellidos"
+                                      Label="Apellidos"
+                                      Required="true"
+                                      RequiredError="Los apellidos son obligatorios"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense" />
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudSelect @bind-Value="_model.TipoDocumento"
+                                   Label="Tipo de Documento"
+                                   Required="true"
+                                   Variant="Variant.Outlined"
+                                   Margin="Margin.Dense">
+                            <MudSelectItem Value="@("DNI")">DNI</MudSelectItem>
+                            <MudSelectItem Value="@("CE")">Carnet de Extranjería</MudSelectItem>
+                            <MudSelectItem Value="@("Pasaporte")">Pasaporte</MudSelectItem>
+                        </MudSelect>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudTextField @bind-Value="_model.NumeroDocumento"
+                                      Label="Número de Documento"
+                                      Required="true"
+                                      RequiredError="El número de documento es obligatorio"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense" />
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudText Typo="Typo.caption" Class="mb-1">Sexo *</MudText>
+                        <MudRadioGroup @bind-Value="_sexoSeleccionado" Class="d-flex flex-row">
+                            <MudRadio Value="@("M")" Color="Color.Primary" Dense="true">Masculino</MudRadio>
+                            <MudRadio Value="@("F")" Color="Color.Secondary" Dense="true">Femenino</MudRadio>
+                        </MudRadioGroup>
+                    </MudItem>
+
+                    <MudItem xs="12" sm="6">
+                        <MudDatePicker @bind-Date="_fechaNacimiento"
+                                       Label="Fecha de Nacimiento"
+                                       Required="true"
+                                       MaxDate="DateTime.Today"
+                                       Variant="Variant.Outlined"
+                                       Margin="Margin.Dense"
+                                       DateFormat="dd/MM/yyyy" />
+                    </MudItem>
+
+                    <MudItem xs="12">
+                        <MudTextField @bind-Value="_model.Direccion"
+                                      Label="Dirección"
+                                      Required="true"
+                                      RequiredError="La dirección es obligatoria"
+                                      Lines="2"
+                                      Variant="Variant.Outlined"
+                                      Margin="Margin.Dense" />
+                    </MudItem>
+
+                    @if (!string.IsNullOrEmpty(_serverError))
+                    {
+                        <MudItem xs="12">
+                            <MudAlert Severity="Severity.Error" Dense="true">
+                                @_serverError
+                            </MudAlert>
+                        </MudItem>
+                    }
+                </MudGrid>
+            </MudForm>
+        }
+    </DialogContent>
+
+    <DialogActions>
+        <MudButton OnClick="Cancel" Size="Size.Small" Disabled="@_saving">Cancelar</MudButton>
+        <MudButton OnClick="Submit"
+                   Variant="Variant.Filled"
+                   Color="Color.Warning"
+                   Size="Size.Small"
+                   Disabled="@(_saving || _loading)">
+            @if (_saving)
+            {
+                <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-1" />
+            }
+            Actualizar
+        </MudButton>
+    </DialogActions>
+</MudDialog>
