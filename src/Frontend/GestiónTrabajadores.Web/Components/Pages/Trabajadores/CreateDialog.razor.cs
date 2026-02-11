@@ -1,6 +1,7 @@
 ﻿using GestiónTrabajadores.Application.DTOs;
 using GestiónTrabajadores.Web.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 
 namespace GestiónTrabajadores.Web.Components.Pages.Trabajadores;
@@ -14,11 +15,17 @@ public partial class CreateDialog
     public ITrabajadorApiService TrabajadorService { get; set; } = default!;
 
     [Inject]
+    public IImagenApiService ImagenService { get; set; } = default!;
+
+    [Inject]
     public ISnackbar Snackbar { get; set; } = default!;
 
     private MudForm _form = default!;
     private bool _formIsValid;
     private bool _saving;
+    private bool _uploading;
+    private string? _previewUrl;
+    private string? _uploadError;
     private string? _serverError;
     private CreateTrabajadorDto _model = new();
     private DateTime? _fechaNacimiento = DateTime.Today.AddYears(-25);
@@ -27,6 +34,81 @@ public partial class CreateDialog
     protected override void OnInitialized()
     {
         _model.TipoDocumento = "DNI";
+    }
+
+    private async Task OnFileSelected(IBrowserFile file)
+    {
+        _uploadError = null;
+
+        if (file.Size > 5 * 1024 * 1024)
+        {
+            _uploadError = "El archivo no puede superar los 5MB";
+            Snackbar.Add(_uploadError, Severity.Error);
+            return;
+        }
+
+        var allowedTypes = new[] { "image/jpeg", "image/png", "image/jpg" };
+        if (!allowedTypes.Contains(file.ContentType.ToLower()))
+        {
+            _uploadError = "Solo se permiten archivos JPG, JPEG o PNG";
+            Snackbar.Add(_uploadError, Severity.Error);
+            return;
+        }
+
+        _uploading = true;
+        StateHasChanged();
+
+        try
+        {
+            var buffer = new byte[file.Size];
+            using var browserStream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
+            await browserStream.ReadExactlyAsync(buffer);
+
+            _previewUrl = $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
+            StateHasChanged();
+
+            var fileName = file.Name;
+            var contentType = file.ContentType;
+
+            var url = await Task.Run(async () =>
+            {
+                using var stream = new MemoryStream(buffer);
+                return await ImagenService.UploadImageAsync(stream, fileName, contentType);
+            });
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                _model.Foto = url;
+                _previewUrl = url;
+                Snackbar.Add("Imagen subida correctamente", Severity.Success);
+            }
+            else
+            {
+                _uploadError = "Error al subir la imagen. Intente de nuevo.";
+                Snackbar.Add(_uploadError, Severity.Error);
+                _previewUrl = null;
+                _model.Foto = null;
+            }
+        }
+        catch (Exception ex)
+        {
+            _uploadError = $"Error: {ex.Message}";
+            Snackbar.Add(_uploadError, Severity.Error);
+            _previewUrl = null;
+            _model.Foto = null;
+        }
+        finally
+        {
+            _uploading = false;
+            StateHasChanged();
+        }
+    }
+
+    private void RemovePhoto()
+    {
+        _model.Foto = null;
+        _previewUrl = null;
+        _uploadError = null;
     }
 
     private void Cancel()
@@ -100,11 +182,7 @@ public partial class CreateDialog
                     try
                     {
                         var json = System.Text.Json.JsonDocument.Parse(parts[1]);
-                        if (json.RootElement.TryGetProperty("errors", out var errors))
-                        {
-                            message = errors.GetString() ?? message;
-                        }
-                        else if (json.RootElement.TryGetProperty("message", out var msg))
+                        if (json.RootElement.TryGetProperty("message", out var msg))
                         {
                             message = msg.GetString() ?? message;
                         }

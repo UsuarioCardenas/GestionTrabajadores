@@ -1,6 +1,7 @@
 ﻿using GestiónTrabajadores.Application.DTOs;
 using GestiónTrabajadores.Web.Services;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 
 namespace GestiónTrabajadores.Web.Components.Pages.Trabajadores;
@@ -17,12 +18,18 @@ public partial class EditDialog
     public ITrabajadorApiService TrabajadorService { get; set; } = default!;
 
     [Inject]
+    public IImagenApiService ImagenService { get; set; } = default!;
+
+    [Inject]
     public ISnackbar Snackbar { get; set; } = default!;
 
     protected MudForm _form = default!;
     protected bool _formIsValid;
     protected bool _loading = true;
     protected bool _saving;
+    protected bool _uploading;
+    protected string? _previewUrl;
+    protected string? _uploadError;
     protected string? _serverError;
     protected UpdateTrabajadorDto _model = new();
     protected DateTime? _fechaNacimiento;
@@ -56,6 +63,7 @@ public partial class EditDialog
                 };
 
                 _fechaNacimiento = trabajador.FechaNacimiento;
+                _previewUrl = trabajador.Foto;
                 _sexoSeleccionado = trabajador.Sexo.ToString();
             }
             else
@@ -73,6 +81,73 @@ public partial class EditDialog
         {
             _loading = false;
         }
+    }
+
+    protected async Task OnFileSelected(IBrowserFile file)
+    {
+        _uploadError = null;
+
+        if (file.Size > 5 * 1024 * 1024)
+        {
+            _uploadError = "El archivo no puede superar los 5MB";
+            return;
+        }
+
+        var allowedTypes = new[] { "image/jpeg", "image/png", "image/jpg" };
+        if (!allowedTypes.Contains(file.ContentType.ToLower()))
+        {
+            _uploadError = "Solo se permiten archivos JPG, JPEG o PNG";
+            return;
+        }
+
+        _uploading = true;
+        StateHasChanged();
+
+        try
+        {
+            var buffer = new byte[file.Size];
+            using var browserStream = file.OpenReadStream(maxAllowedSize: 5 * 1024 * 1024);
+            await browserStream.ReadExactlyAsync(buffer);
+            _previewUrl = $"data:{file.ContentType};base64,{Convert.ToBase64String(buffer)}";
+            StateHasChanged();
+
+            var fileName = file.Name;
+            var contentType = file.ContentType;
+
+            var url = await Task.Run(async () =>
+            {
+                using var stream = new MemoryStream(buffer);
+                return await ImagenService.UploadImageAsync(stream, fileName, contentType);
+            });
+
+            if (!string.IsNullOrEmpty(url))
+            {
+                _model.Foto = url;
+                Snackbar.Add("Imagen subida correctamente", Severity.Success);
+            }
+            else
+            {
+                _uploadError = "Error al subir la imagen. Intente de nuevo.";
+                _previewUrl = _model.Foto;
+            }
+        }
+        catch (Exception ex)
+        {
+            _uploadError = $"Error: {ex.Message}";
+            _previewUrl = _model.Foto;
+        }
+        finally
+        {
+            _uploading = false;
+            StateHasChanged();
+        }
+    }
+
+    protected void RemovePhoto()
+    {
+        _model.Foto = null;
+        _previewUrl = null;
+        _uploadError = null;
     }
 
     protected void Cancel()
@@ -147,11 +222,7 @@ public partial class EditDialog
                     try
                     {
                         var json = System.Text.Json.JsonDocument.Parse(parts[1]);
-                        if (json.RootElement.TryGetProperty("errors", out var errors))
-                        {
-                            message = errors.GetString() ?? message;
-                        }
-                        else if (json.RootElement.TryGetProperty("message", out var msg))
+                        if (json.RootElement.TryGetProperty("message", out var msg))
                         {
                             message = msg.GetString() ?? message;
                         }
@@ -171,6 +242,7 @@ public partial class EditDialog
         finally
         {
             _saving = false;
+            StateHasChanged();
         }
     }
 }

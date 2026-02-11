@@ -5,6 +5,9 @@ using GestiónTrabajadores.Application.Services;
 using GestiónTrabajadores.Application.Validators;
 using GestiónTrabajadores.Infrastructure.Data;
 using GestiónTrabajadores.Infrastructure.Repositories;
+using GestiónTrabajadores.Infrastructure.Services;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,13 +15,24 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<TrabajadoresDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("TrabajadoresConnection")));
 
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 10 * 1024 * 1024;
+});
+
+builder.Services.Configure<KestrelServerOptions>(options =>
+{
+    options.Limits.MaxRequestBodySize = 10 * 1024 * 1024;
+});
+
+
 builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile<MappingProfile>();
 });
 
 builder.Services.AddValidatorsFromAssemblyContaining<CreateTrabajadorDtoValidator>();
-
+builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
 builder.Services.AddScoped<ITrabajadorRepository, TrabajadorRepository>();
 builder.Services.AddScoped<ITrabajadorService, TrabajadorService>();
 

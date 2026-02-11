@@ -2,6 +2,11 @@
   "ConnectionStrings": {
     "TrabajadoresConnection": "Server=TU_SERVIDOR;Database=TrabajadoresPrueba;Trusted_Connection=True;TrustServerCertificate=True;"
   },
+  "Cloudinary": {
+    "CloudName": "TU_CLOUD_NAME",
+    "ApiKey": "TU_API_KEY",
+    "ApiSecret": "TU_API_SECRET"
+  },
   "Logging": {
     "LogLevel": {
       "Default": "Information",

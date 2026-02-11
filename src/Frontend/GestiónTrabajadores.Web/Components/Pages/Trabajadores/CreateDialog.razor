@@ -72,6 +72,50 @@
                                   Margin="Margin.Dense" />
                 </MudItem>
 
+                <MudItem xs="12">
+                    <MudText Typo="Typo.caption" Class="mb-1">Foto (opcional)</MudText>
+                    <MudStack AlignItems="AlignItems.Center" Spacing="2">
+                        @if (!string.IsNullOrEmpty(_previewUrl))
+                        {
+                            <div style="max-width: 200px; max-height: 200px; border-radius: 8px; overflow: hidden; border: 2px solid #ccc;">
+                                <MudImage Src="@_previewUrl" Alt="Preview" Style="max-width: 200px; max-height: 200px; object-fit: contain;" />
+                            </div>
+                        }
+                        <MudStack Row="true" AlignItems="AlignItems.Center" Spacing="2">
+                            <MudFileUpload T="IBrowserFile" Accept=".png,.jpg,.jpeg" FilesChanged="OnFileSelected" MaximumFileCount="1">
+                                <ActivatorContent>
+                                    <MudButton Variant="Variant.Outlined"
+                                               Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                                               Size="Size.Small"
+                                               Disabled="@_uploading">
+                                        @if (_uploading)
+                                        {
+                                            <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-1" />
+                                            <span>Subiendo...</span>
+                                        }
+                                        else
+                                        {
+                                            <span>Seleccionar</span>
+                                        }
+                                    </MudButton>
+                                </ActivatorContent>
+                            </MudFileUpload>
+                            @if (!string.IsNullOrEmpty(_model.Foto))
+                            {
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                               Color="Color.Error"
+                                               Size="Size.Small"
+                                               OnClick="RemovePhoto" />
+                            }
+                        </MudStack>
+                    </MudStack>
+                    @if (!string.IsNullOrEmpty(_uploadError))
+                    {
+                        <MudText Color="Color.Error" Typo="Typo.caption">@_uploadError</MudText>
+                    }
+                </MudItem>
+
                 @if (!string.IsNullOrEmpty(_serverError))
                 {
                     <MudItem xs="12">
@@ -90,7 +134,7 @@
                    Variant="Variant.Filled"
                    OnClick="@Submit"
                    Size="Size.Small"
-                   Disabled="@_saving">
+                   Disabled="@(_saving || _uploading)">
             @if (_saving)
             {
                 <MudProgressCircular Size="Size.Small" Indeterminate="true" Class="mr-1" />

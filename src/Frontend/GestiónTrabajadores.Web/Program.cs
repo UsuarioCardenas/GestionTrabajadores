@@ -11,7 +11,12 @@ builder.Services.AddHttpClient<ITrabajadorApiService, TrabajadorApiService>(clie
 {
     client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7299");
 });
-
+builder.Services.AddHttpClient<IImagenApiService, ImagenApiService>()
+    .ConfigureHttpClient(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7299");
+        client.Timeout = TimeSpan.FromMinutes(2);
+    });
 builder.Services.AddMudServices();
 
 var app = builder.Build();
