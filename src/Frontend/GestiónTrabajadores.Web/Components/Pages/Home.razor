@@ -1,0 +1,105 @@
+﻿@page "/"
+
+<PageTitle>Inicio - Sistema de Gestión</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold;">
+    Bienvenido al Sistema de Gestión de Trabajadores
+</MudText>
+
+<MudText Typo="Typo.body1" Class="mb-4">
+    Utiliza el menú lateral para navegar por las diferentes secciones del sistema.
+</MudText>
+
+<MudGrid Spacing="3">
+    <MudItem xs="12" md="6">
+        <MudCard Elevation="3">
+            <MudCardContent>
+                <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                    <MudIcon Icon="@Icons.Material.Filled.People" Color="Color.Primary" Size="Size.Large" />
+                    <MudText Typo="Typo.h6">Trabajadores</MudText>
+                </MudStack>
+                <MudText Typo="Typo.body2">
+                    Gestiona la información completa de los trabajadores de la empresa.
+                </MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text"
+                           Color="Color.Primary"
+                           Href="/trabajadores"
+                           StartIcon="@Icons.Material.Filled.ArrowForward">
+                    Ver Trabajadores
+                </MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>
+
+<MudPaper Class="pa-4 mt-4" Elevation="2">
+    <MudText Typo="Typo.h6" GutterBottom="true">
+        ¿Qué puedes hacer?
+    </MudText>
+    <MudDivider Class="mb-3" />
+    <MudList T="string" Dense="true">
+        <MudListItem Icon="@Icons.Material.Filled.Add">
+            Registrar nuevos trabajadores
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Edit">
+            Editar información existente
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.FilterList">
+            Filtrar trabajadores por género
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Photo">
+            Subir fotos de perfil
+        </MudListItem>
+        <MudListItem Icon="@Icons.Material.Filled.Delete">
+            Eliminar registros
+        </MudListItem>
+    </MudList>
+</MudPaper>
+
+<MudGrid Class="mt-4" Spacing="3">
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.PhotoCamera" Color="Color.Primary" />
+                <MudText Typo="Typo.h6">Sistema de Fotos</MudText>
+            </MudStack>
+            <MudDivider Class="mb-3" />
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Formatos:</strong> JPG, JPEG, PNG
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Tamaño máx:</strong> 5 MB
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Almacenamiento:</strong> Cloudinary
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <strong>Procesamiento:</strong> 400x400 px
+            </MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" sm="6">
+        <MudPaper Class="pa-4" Elevation="2" Style="height: 100%;">
+            <MudStack Row="true" AlignItems="AlignItems.Center" Class="mb-2">
+                <MudIcon Icon="@Icons.Material.Filled.Person" Color="Color.Secondary" />
+                <MudText Typo="Typo.h6">Datos del Trabajador</MudText>
+            </MudStack>
+            <MudDivider Class="mb-3" />
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Documentos:</strong> DNI, CE, Pasaporte
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Obligatorios:</strong> Nombres, Apellidos, Doc, Fecha Nac., Dirección
+            </MudText>
+            <MudText Typo="Typo.body2" Class="mb-1">
+                <strong>Opcionales:</strong> Foto
+            </MudText>
+            <MudText Typo="Typo.body2">
+                <strong>Sexo:</strong> Masculino / Femenino
+            </MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
