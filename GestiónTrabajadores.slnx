@@ -9,4 +9,7 @@
   <Folder Name="/src/Frontend/">
     <Project Path="src/Frontend/GestiónTrabajadores.Web/GestiónTrabajadores.Web.csproj" Id="6deb9b99-f4b4-4edb-b1fd-d4a7f3b76c86" />
   </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/GestiónTrabajadores.UnitTests/GestiónTrabajadores.UnitTests.csproj" Id="62cbea88-f9a9-4e38-94de-2701426e7d60" />
+  </Folder>
 </Solution>
