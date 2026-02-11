@@ -55,6 +55,13 @@ public partial class Index
         _filtroSexo = value;
     }
 
+    string GetRowStyle(TrabajadorDto trabajador, int index)
+    {
+        return trabajador.Sexo == 'M'
+            ? "background-color: rgba(33, 150, 243, 0.15);"
+            : "background-color: rgba(255, 152, 0, 0.15);";
+    }
+
     async Task OpenCreateDialog()
     {
         var options = new DialogOptions
