@@ -1,0 +1,89 @@
+﻿@page "/trabajadores"
+
+<PageTitle>Trabajadores - Sistema de Gestión</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold;">
+    Gestión de Trabajadores
+</MudText>
+
+<MudPaper Class="pa-4" Elevation="3">
+    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4">
+        <MudText Typo="Typo.h6" Style="color: #000000; font-weight: 500;">Lista de Trabajadores</MudText>
+        <MudButton Variant="Variant.Filled"
+                   Color="Color.Success"
+                   StartIcon="@Icons.Material.Filled.Add"
+                   OnClick="OpenCreateDialog">
+            Nuevo Trabajador
+        </MudButton>
+    </MudStack>
+
+    <MudTable Items="@_trabajadores"
+              Dense="true"
+              Hover="true"
+              Loading="@_loading"
+              LoadingProgressColor="Color.Primary"
+              FixedHeader="true">
+
+        <HeaderContent>
+            <MudTh>Foto</MudTh>
+            <MudTh>Nombres</MudTh>
+            <MudTh>Apellidos</MudTh>
+            <MudTh>Tipo Doc.</MudTh>
+            <MudTh>Nº Documento</MudTh>
+            <MudTh>Sexo</MudTh>
+            <MudTh>Fecha Nac.</MudTh>
+            <MudTh>Dirección</MudTh>
+            <MudTh Style="text-align: center;">Acciones</MudTh>
+        </HeaderContent>
+
+        <RowTemplate>
+            <MudTd>
+                <MudAvatar Size="Size.Medium">
+                    <MudImage Src="@(string.IsNullOrEmpty(context.Foto) ? (context.Sexo == 'M' ? "images/no-photo-male.svg" : "images/no-photo-female.svg") : context.Foto)" />
+                </MudAvatar>
+            </MudTd>
+            <MudTd>@context.Nombres</MudTd>
+            <MudTd>@context.Apellidos</MudTd>
+            <MudTd>@context.TipoDocumento</MudTd>
+            <MudTd>@context.NumeroDocumento</MudTd>
+            <MudTd>
+                <MudChip T="string" Size="Size.Small" Color="@(context.Sexo == 'M' ? Color.Info : Color.Warning)">
+                    @(context.Sexo == 'M' ? "M" : "F")
+                </MudChip>
+            </MudTd>
+            <MudTd>@context.FechaNacimiento.ToString("dd/MM/yyyy")</MudTd>
+            <MudTd>@(context.Direccion ?? "N/A")</MudTd>
+            <MudTd Style="text-align: center;">
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Warning"
+                           Size="Size.Small"
+                           OnClick="@(() => OpenEditDialog(context))">
+                    Editar
+                </MudButton>
+                <MudButton Variant="Variant.Filled"
+                           Color="Color.Error"
+                           Size="Size.Small"
+                           Class="ml-2"
+                           OnClick="@(() => OpenDeleteDialog(context))">
+                    Eliminar
+                </MudButton>
+            </MudTd>
+        </RowTemplate>
+
+        <NoRecordsContent>
+            <MudText Typo="Typo.body1" Align="Align.Center" Class="pa-4">
+                No se encontraron trabajadores
+            </MudText>
+        </NoRecordsContent>
+
+        <LoadingContent>
+            <MudText Typo="Typo.body1">Cargando trabajadores...</MudText>
+        </LoadingContent>
+
+        <PagerContent>
+            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50 }"
+                           RowsPerPageString="Filas:"
+                           InfoFormat="{first_item}-{last_item} de {all_items}" />
+        </PagerContent>
+    </MudTable>
+</MudPaper>
