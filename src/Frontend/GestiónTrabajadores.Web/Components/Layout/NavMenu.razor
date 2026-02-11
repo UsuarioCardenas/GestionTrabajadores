@@ -1,0 +1,24 @@
+﻿<MudNavMenu>
+    <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">
+        Inicio
+    </MudNavLink>
+    <MudNavLink Href="/trabajadores" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.People">
+        Trabajadores
+    </MudNavLink>
+</MudNavMenu>
+
+<style>
+    .mud-nav-link.active {
+        background-color: transparent !important;
+        color: #000000 !important;
+        font-weight: 600 !important;
+    }
+
+        .mud-nav-link.active::before {
+            background-color: transparent !important;
+        }
+
+    .mud-nav-link:hover {
+        background-color: rgba(0, 0, 0, 0.04) !important;
+    }
+</style>

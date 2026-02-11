@@ -6,4 +6,7 @@
     <Project Path="src/Backend/GestiónTrabajadores.Domain/GestiónTrabajadores.Domain.csproj" Id="53fd8158-3413-45ec-abfc-65f93089818a" />
     <Project Path="src/Backend/GestiónTrabajadores.Infrastructure/GestiónTrabajadores.Infrastructure.csproj" Id="56288c90-9b25-4223-81bf-7cb9876f826b" />
   </Folder>
+  <Folder Name="/src/Frontend/">
+    <Project Path="src/Frontend/GestiónTrabajadores.Web/GestiónTrabajadores.Web.csproj" Id="6deb9b99-f4b4-4edb-b1fd-d4a7f3b76c86" />
+  </Folder>
 </Solution>
