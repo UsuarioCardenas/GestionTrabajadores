@@ -100,7 +100,7 @@ Documento completo de validación y pruebas con casos de prueba funcionales, pru
 
 Explicación técnica del proyecto, arquitectura, decisiones de desarrollo y demostración de la aplicación funcionando.
 
-**[Ver Video en Loom](#)** *(Pendiente de agregar enlace)*
+**[Ver Video en Loom](https://www.loom.com/share/94cf301c29c0472791a7ef655dd5b633)**
 
 ---
 
