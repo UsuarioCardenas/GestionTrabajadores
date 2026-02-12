@@ -2,20 +2,21 @@
 
 <PageTitle>Trabajadores - Sistema de Gestión</PageTitle>
 
-<MudText Typo="Typo.h4" Class="mb-4" Style="font-weight: bold;">
+<MudText Typo="Typo.h4" Class="mb-4 page-title" Style="font-weight: bold;">
     Gestión de Trabajadores
 </MudText>
 
-<MudPaper Class="pa-4" Elevation="3">
-    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4">
-        <MudText Typo="Typo.h6" Style="color: #000000; font-weight: 500;">Lista de Trabajadores</MudText>
-        <MudStack Row="true" Spacing="2">
+<MudPaper Class="pa-2 pa-sm-4" Elevation="3">
+    <MudStack Row="true" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4 flex-wrap page-header-stack">
+        <MudText Typo="Typo.h6" Class="d-none d-sm-block" Style="color: #000000; font-weight: 500;">Lista de Trabajadores</MudText>
+        <MudStack Row="true" Spacing="2" Class="header-actions flex-wrap" Style="gap: 8px;">
             <MudSelect T="string"
                        Value="@_filtroSexo"
                        ValueChanged="@OnFiltroSexoChanged"
                        Variant="Variant.Outlined"
                        Dense="true"
                        Margin="Margin.Dense"
+                       Class="filter-select"
                        Style="min-width: 120px;">
                 <MudSelectItem Value="@("Todos")">Todos</MudSelectItem>
                 <MudSelectItem Value="@("M")">Masculino</MudSelectItem>
@@ -24,80 +25,155 @@
             <MudButton Variant="Variant.Filled"
                        Color="Color.Success"
                        StartIcon="@Icons.Material.Filled.Add"
-                       OnClick="OpenCreateDialog">
-                Nuevo Trabajador
+                       OnClick="OpenCreateDialog"
+                       Class="new-worker-btn">
+                <span class="d-none d-sm-inline">Nuevo Trabajador</span>
+                <span class="d-inline d-sm-none">Nuevo</span>
             </MudButton>
         </MudStack>
     </MudStack>
 
-    <MudTable Items="@_trabajadoresFiltrados"
-              Dense="true"
-              Hover="true"
-              Loading="@_loading"
-              LoadingProgressColor="Color.Primary"
-              FixedHeader="true"
-              RowStyleFunc="@GetRowStyle">
+    <div class="table-responsive-wrapper">
+        <MudTable Items="@_trabajadoresFiltrados"
+                  Dense="true"
+                  Hover="true"
+                  Loading="@_loading"
+                  LoadingProgressColor="Color.Primary"
+                  FixedHeader="true"
+                  RowStyleFunc="@GetRowStyle"
+                  Breakpoint="Breakpoint.None">
 
-        <HeaderContent>
-            <MudTh>Foto</MudTh>
-            <MudTh>Nombres</MudTh>
-            <MudTh>Apellidos</MudTh>
-            <MudTh>Tipo Doc.</MudTh>
-            <MudTh>Nº Documento</MudTh>
-            <MudTh>Sexo</MudTh>
-            <MudTh>Fecha Nac.</MudTh>
-            <MudTh>Dirección</MudTh>
-            <MudTh Style="text-align: center;">Acciones</MudTh>
-        </HeaderContent>
+            <HeaderContent>
+                <MudTh>Foto</MudTh>
+                <MudTh>Nombres</MudTh>
+                <MudTh>Apellidos</MudTh>
+                <MudTh Class="d-none d-md-table-cell">Tipo Doc.</MudTh>
+                <MudTh>Nº Documento</MudTh>
+                <MudTh>Sexo</MudTh>
+                <MudTh Class="d-none d-lg-table-cell">Fecha Nac.</MudTh>
+                <MudTh Class="d-none d-xl-table-cell">Dirección</MudTh>
+                <MudTh Style="text-align: center;">Acciones</MudTh>
+            </HeaderContent>
 
-        <RowTemplate>
-            <MudTd>
-                <MudAvatar Size="Size.Medium">
-                    <MudImage Src="@(string.IsNullOrEmpty(context.Foto) ? (context.Sexo == 'M' ? "images/no-photo-male.svg" : "images/no-photo-female.svg") : context.Foto)" />
-                </MudAvatar>
-            </MudTd>
-            <MudTd>@context.Nombres</MudTd>
-            <MudTd>@context.Apellidos</MudTd>
-            <MudTd>@context.TipoDocumento</MudTd>
-            <MudTd>@context.NumeroDocumento</MudTd>
-            <MudTd>
-                <MudChip T="string" Size="Size.Small" Color="@(context.Sexo == 'M' ? Color.Info : Color.Warning)">
-                    @(context.Sexo == 'M' ? "M" : "F")
-                </MudChip>
-            </MudTd>
-            <MudTd>@context.FechaNacimiento.ToString("dd/MM/yyyy")</MudTd>
-            <MudTd>@(context.Direccion ?? "N/A")</MudTd>
-            <MudTd Style="text-align: center;">
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Warning"
-                           Size="Size.Small"
-                           OnClick="@(() => OpenEditDialog(context))">
-                    Editar
-                </MudButton>
-                <MudButton Variant="Variant.Filled"
-                           Color="Color.Error"
-                           Size="Size.Small"
-                           Class="ml-2"
-                           OnClick="@(() => OpenDeleteDialog(context))">
-                    Eliminar
-                </MudButton>
-            </MudTd>
-        </RowTemplate>
+            <RowTemplate>
+                <MudTd>
+                    <MudAvatar Size="Size.Medium" Class="worker-avatar">
+                        <MudImage Src="@(string.IsNullOrEmpty(context.Foto) ? (context.Sexo == 'M' ? "images/no-photo-male.svg" : "images/no-photo-female.svg") : context.Foto)" />
+                    </MudAvatar>
+                </MudTd>
+                <MudTd DataLabel="Nombres">@context.Nombres</MudTd>
+                <MudTd DataLabel="Apellidos">@context.Apellidos</MudTd>
+                <MudTd DataLabel="Tipo Doc." Class="d-none d-md-table-cell">@context.TipoDocumento</MudTd>
+                <MudTd DataLabel="Nº Doc.">@context.NumeroDocumento</MudTd>
+                <MudTd DataLabel="Sexo">
+                    <MudChip T="string" Size="Size.Small" Color="@(context.Sexo == 'M' ? Color.Info : Color.Warning)">
+                        @(context.Sexo == 'M' ? "M" : "F")
+                    </MudChip>
+                </MudTd>
+                <MudTd DataLabel="Fecha Nac." Class="d-none d-lg-table-cell">@context.FechaNacimiento.ToString("dd/MM/yyyy")</MudTd>
+                <MudTd DataLabel="Dirección" Class="d-none d-xl-table-cell">@(context.Direccion ?? "N/A")</MudTd>
+                <MudTd Style="text-align: center;" DataLabel="Acciones">
+                    <MudStack Row="true" Spacing="1" Justify="Justify.Center" Class="action-buttons-stack">
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit"
+                                       Color="Color.Warning"
+                                       Size="Size.Small"
+                                       OnClick="@(() => OpenEditDialog(context))"
+                                       Class="d-inline d-sm-none"
+                                       Title="Editar" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete"
+                                       Color="Color.Error"
+                                       Size="Size.Small"
+                                       OnClick="@(() => OpenDeleteDialog(context))"
+                                       Class="d-inline d-sm-none"
+                                       Title="Eliminar" />
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Warning"
+                                   Size="Size.Small"
+                                   OnClick="@(() => OpenEditDialog(context))"
+                                   Class="d-none d-sm-inline-flex">
+                            Editar
+                        </MudButton>
+                        <MudButton Variant="Variant.Filled"
+                                   Color="Color.Error"
+                                   Size="Size.Small"
+                                   OnClick="@(() => OpenDeleteDialog(context))"
+                                   Class="d-none d-sm-inline-flex">
+                            Eliminar
+                        </MudButton>
+                    </MudStack>
+                </MudTd>
+            </RowTemplate>
 
-        <NoRecordsContent>
-            <MudText Typo="Typo.body1" Align="Align.Center" Class="pa-4">
-                No se encontraron trabajadores
-            </MudText>
-        </NoRecordsContent>
+            <NoRecordsContent>
+                <MudText Typo="Typo.body1" Align="Align.Center" Class="pa-4">
+                    No se encontraron trabajadores
+                </MudText>
+            </NoRecordsContent>
 
-        <LoadingContent>
-            <MudText Typo="Typo.body1">Cargando trabajadores...</MudText>
-        </LoadingContent>
+            <LoadingContent>
+                <MudText Typo="Typo.body1">Cargando trabajadores...</MudText>
+            </LoadingContent>
 
-        <PagerContent>
-            <MudTablePager PageSizeOptions="new int[] { 10, 25, 50 }"
-                           RowsPerPageString="Filas:"
-                           InfoFormat="{first_item}-{last_item} de {all_items}" />
-        </PagerContent>
-    </MudTable>
+            <PagerContent>
+                <MudTablePager PageSizeOptions="new int[] { 10, 25, 50 }"
+                               RowsPerPageString="Filas:"
+                               InfoFormat="{first_item}-{last_item} de {all_items}" />
+            </PagerContent>
+        </MudTable>
+    </div>
 </MudPaper>
+
+<style>
+    .table-responsive-wrapper {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .page-header-stack {
+        gap: 12px;
+    }
+
+    .action-buttons-stack {
+        flex-wrap: nowrap;
+    }
+
+    @@media (max-width: 600px) {
+        .page-title {
+            font-size: 1.25rem;
+        }
+
+        .page-header-stack {
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+
+        .header-actions {
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        .filter-select {
+            flex: 1;
+            min-width: 100px !important;
+        }
+
+        .new-worker-btn {
+            flex: 1;
+        }
+
+        .worker-avatar {
+            width: 32px !important;
+            height: 32px !important;
+        }
+    }
+
+    @@media (min-width: 601px) and (max-width: 960px) {
+        .page-title {
+            font-size: 1.5rem;
+        }
+    }
+</style>

@@ -1,8 +1,9 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
 
 <MudThemeProvider />
 <MudPopoverProvider />
-<MudDialogProvider MaxWidth="MaxWidth.Small" Position="DialogPosition.Center" />
+<MudDialogProvider MaxWidth="MaxWidth.Small" Position="DialogPosition.Center" FullWidth="true" />
 <MudSnackbarProvider />
 
 <MudLayout>
@@ -11,28 +12,71 @@
                        Color="Color.Inherit"
                        Edge="Edge.Start"
                        OnClick="@ToggleDrawer" />
-        <MudText Typo="Typo.h5" Class="ml-3">
+        <MudText Typo="Typo.h5" Class="ml-3 app-title">
             Sistema de Gestión
         </MudText>
         <MudSpacer />
     </MudAppBar>
 
-    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
+    <MudDrawer @bind-Open="_drawerOpen" 
+               ClipMode="DrawerClipMode.Always" 
+               Elevation="2"
+               Variant="@_drawerVariant"
+               Breakpoint="Breakpoint.Md">
         <MudDrawerHeader>
             <MudText Typo="Typo.h6">Menú</MudText>
         </MudDrawerHeader>
         <NavMenu />
     </MudDrawer>
 
-    <MudMainContent Class="pt-16 px-16">
-        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-8">
+    <MudMainContent Class="pt-16 main-content-responsive">
+        <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge" Class="my-4 my-md-8 px-2 px-md-4">
             @Body
         </MudContainer>
     </MudMainContent>
 </MudLayout>
 
+<style>
+    .main-content-responsive {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    @@media (min-width: 960px) {
+        .main-content-responsive {
+            padding-left: 64px;
+            padding-right: 64px;
+        }
+    }
+
+    @@media (max-width: 600px) {
+        .main-content-responsive {
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .app-title {
+            font-size: 1.1rem !important;
+        }
+    }
+</style>
+
 @code {
     bool _drawerOpen = true;
+    DrawerVariant _drawerVariant = DrawerVariant.Responsive;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var width = await JSRuntime.InvokeAsync<int>("eval", "window.innerWidth");
+            if (width < 960)
+            {
+                _drawerOpen = false;
+                StateHasChanged();
+            }
+        }
+    }
 
     void ToggleDrawer()
     {

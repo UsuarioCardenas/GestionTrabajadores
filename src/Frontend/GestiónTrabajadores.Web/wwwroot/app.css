@@ -23,3 +23,214 @@ html, body {
     align-items: center;
     z-index: 9999;
 }
+
+/* ==========================================
+   RESPONSIVE STYLES
+   ========================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .mud-main-content {
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+    }
+
+    .mud-container {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+    }
+
+    .mud-table th,
+    .mud-table td {
+        padding: 8px 6px !important;
+        font-size: 0.85rem !important;
+    }
+
+    .page-header-stack {
+        flex-direction: column !important;
+        gap: 16px !important;
+        align-items: stretch !important;
+    }
+
+    .header-actions {
+        justify-content: space-between !important;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .mud-main-content {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+        padding-top: 56px !important;
+    }
+
+    .mud-container {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .mud-typography-h4 {
+        font-size: 1.5rem !important;
+    }
+
+    .mud-typography-h6 {
+        font-size: 1rem !important;
+    }
+
+    .mud-paper {
+        padding: 12px !important;
+    }
+
+    /* Table responsive */
+    .mud-table-container {
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .mud-table {
+        min-width: 800px !important;
+    }
+
+    .mud-table th,
+    .mud-table td {
+        padding: 6px 4px !important;
+        font-size: 0.8rem !important;
+        white-space: nowrap;
+    }
+
+    /* Avatar más pequeño en móvil */
+    .mud-avatar-medium {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    /* Botones de acción más pequeños */
+    .mud-button-small {
+        padding: 4px 8px !important;
+        font-size: 0.7rem !important;
+        min-width: auto !important;
+    }
+
+    .action-btn-text {
+        display: none;
+    }
+
+    /* Header responsive */
+    .page-header-stack {
+        flex-direction: column !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+    }
+
+    .header-actions {
+        flex-direction: column !important;
+        gap: 8px !important;
+    }
+
+    .header-actions .mud-select {
+        width: 100% !important;
+    }
+
+    .header-actions .mud-button {
+        width: 100% !important;
+    }
+
+    /* AppBar responsive */
+    .mud-appbar .mud-typography-h5 {
+        font-size: 1.1rem !important;
+    }
+
+    /* Dialog responsive */
+    .mud-dialog {
+        margin: 8px !important;
+        max-height: 90vh !important;
+    }
+
+    .mud-dialog-content {
+        padding: 12px !important;
+    }
+
+    /* Pager responsive */
+    .mud-table-pagination {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+
+    .mud-table-pagination .mud-select {
+        min-width: 80px !important;
+    }
+}
+
+/* Extra small mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .mud-main-content {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+
+    .mud-typography-h4 {
+        font-size: 1.25rem !important;
+    }
+
+    .mud-paper {
+        padding: 8px !important;
+        border-radius: 8px !important;
+    }
+
+    .mud-table th,
+    .mud-table td {
+        padding: 4px 3px !important;
+        font-size: 0.75rem !important;
+    }
+
+    .mud-chip {
+        font-size: 0.65rem !important;
+        height: 20px !important;
+    }
+
+    .mud-avatar-medium {
+        width: 28px !important;
+        height: 28px !important;
+    }
+
+    /* Ocultar columnas menos importantes en móvil muy pequeño */
+    .hide-on-xs {
+        display: none !important;
+    }
+
+    .mud-button-small {
+        padding: 2px 6px !important;
+        font-size: 0.65rem !important;
+    }
+}
+
+/* Drawer responsive */
+@media (max-width: 960px) {
+    .mud-drawer {
+        width: 240px !important;
+    }
+
+    .mud-drawer-header {
+        padding: 12px 16px !important;
+    }
+}
+
+/* Mejoras para touch en dispositivos móviles */
+@media (pointer: coarse) {
+    .mud-button {
+        min-height: 44px;
+    }
+
+    .mud-nav-link {
+        min-height: 48px !important;
+    }
+
+    .mud-table-row {
+        min-height: 48px;
+    }
+}
+
