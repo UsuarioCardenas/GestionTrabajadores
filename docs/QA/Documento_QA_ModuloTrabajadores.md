@@ -13,7 +13,7 @@
 
 ---
 
-## ?? Índice
+## Índice
 
 1. [Introducción](#1-introducción)
 2. [Alcance de las Pruebas](#2-alcance-de-las-pruebas)
@@ -58,20 +58,20 @@ El módulo permite realizar las operaciones CRUD (Crear, Leer, Actualizar, Elimin
 
 | Funcionalidad | Descripción | Cubierto |
 |---------------|-------------|----------|
-| Listado de trabajadores | Visualizar todos los trabajadores registrados | ? |
-| Registro de trabajador | Crear nuevo trabajador con todos sus datos | ? |
-| Edición de trabajador | Modificar datos de un trabajador existente | ? |
-| Eliminación de trabajador | Eliminar registro con confirmación | ? |
-| Filtro por sexo | Filtrar lista por Masculino/Femenino | ? |
-| Coloreo de filas | Azul para masculino, naranja para femenino | ? |
-| Validaciones | Campos requeridos, documento único, formatos | ? |
-| Subida de foto | Cargar imagen del trabajador | ? |
+| Listado de trabajadores | Visualizar todos los trabajadores registrados | Sí |
+| Registro de trabajador | Crear nuevo trabajador con todos sus datos | Sí |
+| Edición de trabajador | Modificar datos de un trabajador existente | Sí |
+| Eliminación de trabajador | Eliminar registro con confirmación | Sí |
+| Filtro por sexo | Filtrar lista por Masculino/Femenino | Sí |
+| Coloreo de filas | Azul para masculino, naranja para femenino | Sí |
+| Validaciones | Campos requeridos, documento único, formatos | Sí |
+| Subida de foto | Cargar imagen del trabajador | Sí |
 
 ### 2.2 Tipos de Pruebas Realizadas
 
 1. **Pruebas Funcionales**: Verificación manual de cada funcionalidad desde la interfaz
 2. **Pruebas Unitarias**: Tests automatizados para servicios y controladores
-3. **Pruebas de Integración**: Tests automatizados del flujo completo API ? Base de datos
+3. **Pruebas de Integración**: Tests automatizados del flujo completo API - Base de datos
 
 ---
 
@@ -105,7 +105,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - Cada fila muestra: foto, nombres, apellidos, tipo documento, número documento, sexo, fecha nacimiento, dirección
 - Las filas están coloreadas según el sexo (azul/naranja)
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > La lista de trabajadores se carga correctamente mostrando todos los campos. Las filas se colorean correctamente: azul para masculino y naranja para femenino.
 
 **Evidencias:**
@@ -137,7 +137,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - La tabla se muestra vacía con un mensaje "No hay trabajadores registrados"
 - No se muestran errores
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El sistema maneja correctamente el escenario sin datos, mostrando el mensaje de no tener trabajadores en la interfaz.
 
 **Evidencias:**
@@ -171,7 +171,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - Todas las filas visibles son de color azul
 - El contador de registros se actualiza
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El filtro funciona correctamente, mostrando únicamente los trabajadores masculinos con las filas en color azul.
 
 **Evidencias:**
@@ -205,7 +205,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - Todas las filas visibles son de color naranja
 - El contador de registros se actualiza
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El filtro funciona correctamente, mostrando únicamente los trabajadores femeninos con las filas en color naranja.
 
 **Evidencias:**
@@ -237,7 +237,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - Filas de trabajadores masculinos: fondo azul claro
 - Filas de trabajadores femeninos: fondo naranja claro
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El coloreo se aplica correctamente diferenciando visualmente a los trabajadores por sexo.
 
 **Evidencias:**
@@ -293,7 +293,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - La fila del nuevo registro es de color naranja (femenino)
 - La foto se visualiza correctamente
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El trabajador se registró exitosamente. El modal se cerró, apareció la notificación de confirmación en la esquina superior derecha y el nuevo registro se visualiza correctamente en la base de datos.
 
 **Evidencias:**
@@ -333,7 +333,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
   - "La fecha de nacimiento es requerida"
   - "La dirección es requerida"
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El sistema muestra correctamente los mensajes de validación para cada campo requerido, impidiendo el envío del formulario.
 
 **Evidencias:**
@@ -375,7 +375,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - El registro NO se crea
 - Se muestra mensaje de error: "Ya existe un trabajador con este número de documento"
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El sistema detecta el documento duplicado y muestra la advertencia correspondiente, impidiendo la creación del registro.
 
 **Evidencias:**
@@ -407,7 +407,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - El registro se crea exitosamente
 - El trabajador aparece en la lista con una imagen por defecto o placeholder
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El sistema permite crear trabajadores sin foto, mostrando un avatar por defecto en la tabla.
 
 **Evidencias:**
@@ -449,7 +449,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - Aparece mensaje "Trabajador actualizado correctamente"
 - La tabla se actualiza mostrando el nuevo valor de dirección
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > Los datos se actualizaron correctamente. El modal se cerró, se mostró el mensaje de éxito y la tabla refleja los cambios realizados.
 
 **Evidencias:**
@@ -483,7 +483,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - El modal se cierra sin guardar
 - Los datos originales permanecen sin cambios
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > Al cancelar la edición, los datos originales se mantienen intactos. La dirección modificada en el modal no se guardó y la tabla muestra los valores originales.
 
 **Evidencias:**
@@ -515,7 +515,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - El sistema impide la actualización
 - Muestra mensaje: "Ya existe un trabajador con este número de documento"
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El sistema valida correctamente que no se dupliquen números de documento entre trabajadores diferentes.
 
 **Evidencias:**
@@ -551,7 +551,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - La tabla se actualiza (el registro ya no aparece)
 - Mensaje de éxito: "Trabajador eliminado correctamente"
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El mensaje de confirmación se muestra correctamente con el texto requerido. Al confirmar, el registro se elimina y la tabla se actualiza mostrando la notificación de éxito.
 
 **Evidencias:**
@@ -583,7 +583,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 - El diálogo se cierra
 - El registro permanece en la tabla sin cambios
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > Al cancelar la eliminación, el registro permanece intacto en la base de datos y la tabla. No se realizó ninguna acción de borrado.
 
 **Evidencias:**
@@ -613,7 +613,7 @@ A continuación se documentan los casos de prueba funcionales realizados sobre el
 **Resultado Esperado:**
 - El mensaje debe decir exactamente: "¿Está seguro de eliminar el registro?"
 
-**Resultado Obtenido:** ? PASÓ
+**Resultado Obtenido:** PASÓ
 > El mensaje de confirmación coincide exactamente con el texto requerido: **"¿Está seguro de eliminar el registro?"**.
 
 **Evidencias:**
@@ -634,14 +634,14 @@ El servicio `TrabajadorService` contiene la lógica de negocio principal. Se real
 
 | ID | Nombre del Test | Descripción | Estado |
 |----|-----------------|-------------|--------|
-| UT-001 | `GetAllAsync_DebeRetornarListaDeTrabajadores` | Verifica que el método GetAll retorne correctamente la lista de trabajadores cuando existen registros | ? PASÓ |
-| UT-002 | `GetAllAsync_SinTrabajadores_DebeRetornarListaVacia` | Verifica que retorne una lista vacía cuando no hay registros en la BD | ? PASÓ |
-| UT-003 | `GetByIdAsync_ConIdValido_DebeRetornarTrabajador` | Verifica la búsqueda exitosa de un trabajador por su ID | ? PASÓ |
-| UT-004 | `GetByIdAsync_ConIdInexistente_DebeRetornarNull` | Verifica que retorne null cuando se busca un ID que no existe | ? PASÓ |
-| UT-005 | `CreateAsync_ConDatosValidos_DebeCrearTrabajador` | Verifica la creación exitosa de un trabajador con datos válidos | ? PASÓ |
-| UT-006 | `CreateAsync_ConDocumentoDuplicado_DebeLanzarExcepcion` | Verifica que lance excepción cuando se intenta crear con documento duplicado | ? PASÓ |
-| UT-007 | `DeleteAsync_ConIdValido_DebeEliminar` | Verifica la eliminación exitosa de un trabajador existente | ? PASÓ |
-| UT-008 | `DeleteAsync_ConIdInexistente_DebeLanzarExcepcion` | Verifica que lance excepción al eliminar un trabajador inexistente | ? PASÓ |
+| UT-001 | `GetAllAsync_DebeRetornarListaDeTrabajadores` | Verifica que el método GetAll retorne correctamente la lista de trabajadores cuando existen registros | PASÓ |
+| UT-002 | `GetAllAsync_SinTrabajadores_DebeRetornarListaVacia` | Verifica que retorne una lista vacía cuando no hay registros en la BD | PASÓ |
+| UT-003 | `GetByIdAsync_ConIdValido_DebeRetornarTrabajador` | Verifica la búsqueda exitosa de un trabajador por su ID | PASÓ |
+| UT-004 | `GetByIdAsync_ConIdInexistente_DebeRetornarNull` | Verifica que retorne null cuando se busca un ID que no existe | PASÓ |
+| UT-005 | `CreateAsync_ConDatosValidos_DebeCrearTrabajador` | Verifica la creación exitosa de un trabajador con datos válidos | PASÓ |
+| UT-006 | `CreateAsync_ConDocumentoDuplicado_DebeLanzarExcepcion` | Verifica que lance excepción cuando se intenta crear con documento duplicado | PASÓ |
+| UT-007 | `DeleteAsync_ConIdValido_DebeEliminar` | Verifica la eliminación exitosa de un trabajador existente | PASÓ |
+| UT-008 | `DeleteAsync_ConIdInexistente_DebeLanzarExcepcion` | Verifica que lance excepción al eliminar un trabajador inexistente | PASÓ |
 
 #### Detalle de Pruebas de Servicio
 
@@ -652,7 +652,7 @@ Descripción: Verifica que el servicio retorne correctamente todos los trabajador
 Configuración: Se mockea el repositorio para retornar 2 trabajadores de prueba
 Ejecución: Se llama al método GetAllAsync()
 Validación: Se verifica que la lista no sea nula y contenga 2 elementos
-Resultado: ? La lista se retorna correctamente con los 2 trabajadores mockeados
+Resultado: La lista se retorna correctamente con los 2 trabajadores mockeados
 ```
 
 **UT-005: CreateAsync_ConDatosValidos_DebeCrearTrabajador**
@@ -668,7 +668,7 @@ Datos de entrada:
   - FechaNacimiento: 01/01/1990
   - Direccion: "Calle 123"
 Validaciones ejecutadas: FluentValidation, documento único
-Resultado: ? Trabajador creado con ID asignado correctamente
+Resultado: Trabajador creado con ID asignado correctamente
 ```
 
 **UT-006: CreateAsync_ConDocumentoDuplicado_DebeLanzarExcepcion**
@@ -678,7 +678,7 @@ Descripción: Verifica que no se permita duplicar números de documento
 Configuración: Se mockea ExistsByDocumentoAsync para retornar true
 Datos de entrada: Documento "12345678" (ya existente)
 Validación: Se espera InvalidOperationException
-Resultado: ? Se lanza la excepción esperada
+Resultado: Se lanza la excepción esperada
 ```
 
 ---
@@ -689,11 +689,11 @@ El controlador `TrabajadoresController` maneja las peticiones HTTP de la API RES
 
 | ID | Nombre del Test | Descripción | Estado |
 |----|-----------------|-------------|--------|
-| UT-009 | `GetAll_DebeRetornarOk` | Verifica que GET /api/trabajadores retorne HTTP 200 | ? PASÓ |
-| UT-010 | `GetById_ConIdValido_DebeRetornarOk` | Verifica GET /api/trabajadores/{id} con ID válido retorne HTTP 200 | ? PASÓ |
-| UT-011 | `GetById_ConIdInexistente_DebeRetornar404` | Verifica que retorne HTTP 404 cuando el trabajador no existe | ? PASÓ |
-| UT-012 | `Delete_ConIdValido_DebeRetornarOk` | Verifica eliminación exitosa retorne HTTP 200 | ? PASÓ |
-| UT-013 | `Delete_ConIdInexistente_DebeRetornar404` | Verifica que eliminar ID inexistente retorne HTTP 404 | ? PASÓ |
+| UT-009 | `GetAll_DebeRetornarOk` | Verifica que GET /api/trabajadores retorne HTTP 200 | PASÓ |
+| UT-010 | `GetById_ConIdValido_DebeRetornarOk` | Verifica GET /api/trabajadores/{id} con ID válido retorne HTTP 200 | PASÓ |
+| UT-011 | `GetById_ConIdInexistente_DebeRetornar404` | Verifica que retorne HTTP 404 cuando el trabajador no existe | PASÓ |
+| UT-012 | `Delete_ConIdValido_DebeRetornarOk` | Verifica eliminación exitosa retorne HTTP 200 | PASÓ |
+| UT-013 | `Delete_ConIdInexistente_DebeRetornar404` | Verifica que eliminar ID inexistente retorne HTTP 404 | PASÓ |
 
 #### Detalle de Pruebas de Controlador
 
@@ -703,7 +703,7 @@ El controlador `TrabajadoresController` maneja las peticiones HTTP de la API RES
 Endpoint: GET /api/trabajadores/1
 Configuración: Se mockea servicio para retornar trabajador con ID 1
 Resultado esperado: HTTP 200 OK con datos del trabajador
-Resultado obtenido: ? Status code 200, trabajador retornado correctamente
+Resultado obtenido: Status code 200, trabajador retornado correctamente
 ```
 
 **UT-011: GetById_ConIdInexistente_DebeRetornar404**
@@ -712,7 +712,7 @@ Resultado obtenido: ? Status code 200, trabajador retornado correctamente
 Endpoint: GET /api/trabajadores/999
 Configuración: Se mockea servicio para retornar null
 Resultado esperado: HTTP 404 Not Found
-Resultado obtenido: ? Status code 404 retornado correctamente
+Resultado obtenido: Status code 404 retornado correctamente
 ```
 
 ---
@@ -763,15 +763,15 @@ Se utiliza `CustomWebApplicationFactory` para crear un servidor de pruebas con:
 
 | ID | Endpoint | Método | Descripción | Estado |
 |----|----------|--------|-------------|--------|
-| IT-001 | `/api/trabajadores` | GET | Obtener todos los trabajadores | ? PASÓ |
-| IT-002 | `/api/trabajadores/99999` | GET | Obtener trabajador inexistente | ? PASÓ |
-| IT-003 | `/api/trabajadores` | POST | Crear trabajador con datos válidos | ? PASÓ |
-| IT-004 | `/api/trabajadores` | POST | Crear con datos inválidos | ? PASÓ |
-| IT-005 | `/api/trabajadores` | POST | Crear con documento duplicado | ? PASÓ |
-| IT-006 | `/api/trabajadores/99999` | PUT | Actualizar trabajador inexistente | ? PASÓ |
-| IT-007 | `/api/trabajadores/999` | PUT | Actualizar con IDs diferentes | ? PASÓ |
-| IT-008 | `/api/trabajadores/99999` | DELETE | Eliminar trabajador inexistente | ? PASÓ |
-| IT-009 | Ciclo completo | CRUD | Verificación del ciclo CREATE?READ?UPDATE?DELETE | ? PASÓ |
+| IT-001 | `/api/trabajadores` | GET | Obtener todos los trabajadores | PASÓ |
+| IT-002 | `/api/trabajadores/99999` | GET | Obtener trabajador inexistente | PASÓ |
+| IT-003 | `/api/trabajadores` | POST | Crear trabajador con datos válidos | PASÓ |
+| IT-004 | `/api/trabajadores` | POST | Crear con datos inválidos | PASÓ |
+| IT-005 | `/api/trabajadores` | POST | Crear con documento duplicado | PASÓ |
+| IT-006 | `/api/trabajadores/99999` | PUT | Actualizar trabajador inexistente | PASÓ |
+| IT-007 | `/api/trabajadores/999` | PUT | Actualizar con IDs diferentes | PASÓ |
+| IT-008 | `/api/trabajadores/99999` | DELETE | Eliminar trabajador inexistente | PASÓ |
+| IT-009 | Ciclo completo | CRUD | Verificación del ciclo CREATE-READ-UPDATE-DELETE | PASÓ |
 
 #### Detalle de Pruebas de Integración
 
@@ -785,7 +785,7 @@ Response esperado: HTTP 200 OK con array JSON
 Response obtenido: 
   Status Code: 200 OK
   Body: [...] (array de trabajadores)
-Resultado: ? PASÓ
+Resultado: PASÓ
 
 ```
 Endpoint: POST /api/trabajadores
@@ -804,7 +804,7 @@ Response esperado: HTTP 201 Created con datos del trabajador creado
 Response obtenido:
   Status Code: 201 Created
   Body: { "idTrabajador": X, ... }
-Resultado: ? PASÓ
+Resultado: PASÓ
 ```
 
 **IT-004:
@@ -817,7 +817,7 @@ Response esperado: HTTP 400 Bad Request con errores de validación
 Response obtenido:
   Status Code: 400 Bad Request
   Body: { "errors": { ... } }
-Resultado: ? PASÓ
+Resultado: PASÓ
 ```
 
 **IT-005:
@@ -826,12 +826,12 @@ Resultado: ? PASÓ
 Endpoint: POST /api/trabajadores (x2)
 Descripción: Verifica que no se permitan documentos duplicados
 Pasos:
-  1. POST crear trabajador con documento "11111111" ? 201 Created
-  2. POST crear otro trabajador con mismo documento ? 400 Bad Request
+  1. POST crear trabajador con documento "11111111" - 201 Created
+  2. POST crear otro trabajador con mismo documento - 400 Bad Request
 Response segundo POST:
   Status Code: 400 Bad Request
   Body: { "message": "Ya existe un trabajador con este número de documento" }
-Resultado: ? PASÓ
+Resultado: PASÓ
 ```
 
 ---
@@ -922,12 +922,12 @@ Las evidencias de las pruebas funcionales se encuentran documentadas en cada cas
 
 El **Módulo de Gestión de Trabajadores** ha superado satisfactoriamente todas las pruebas realizadas, cumpliendo con el 100% de los requerimientos funcionales especificados:
 
-? **Listado de trabajadores** - Funciona correctamente con procedimiento almacenado  
-? **Registro de trabajador** - Modal funcional con todas las validaciones  
-? **Edición de trabajador** - Actualización correcta mediante modal  
-? **Eliminación de trabajador** - Con mensaje de confirmación requerido  
-? **Filtro por sexo** - Implementado y funcionando (Bonus)  
-? **Coloreo de filas** - Azul/Naranja según sexo (Bonus)  
+- **Listado de trabajadores** - Funciona correctamente con procedimiento almacenado  
+- **Registro de trabajador** - Modal funcional con todas las validaciones  
+- **Edición de trabajador** - Actualización correcta mediante modal  
+- **Eliminación de trabajador** - Con mensaje de confirmación requerido  
+- **Filtro por sexo** - Implementado y funcionando (Bonus)  
+- **Coloreo de filas** - Azul/Naranja según sexo (Bonus)
 
 ### 8.2 Calidad del Código
 

@@ -1,27 +1,27 @@
-# 🧑‍💼 Módulo de Gestión de Trabajadores
+# Módulo de Gestión de Trabajadores
 
 **Sistema de Gestión de Recursos Humanos | MYPER Software**
 
 ---
 
-## 📋 Descripción
+## Descripción
 
 Sistema web para la gestión de trabajadores desarrollado con **.NET 8**, **Blazor WebAssembly** y **Entity Framework Core**. Permite realizar operaciones CRUD completas sobre registros de trabajadores con una interfaz moderna y responsiva.
 
-### ✨ Funcionalidades Implementadas
+### Funcionalidades Implementadas
 
-- ✅ **Listado de trabajadores** - Visualización de todos los registros con procedimiento almacenado
-- ✅ **Registro de trabajador** - Creación mediante modal con validaciones
-- ✅ **Edición de trabajador** - Actualización de datos mediante modal
-- ✅ **Eliminación de trabajador** - Con mensaje de confirmación requerido
-- ✅ **Filtro por sexo** - Filtrado por Masculino/Femenino *(Bonus)*
-- ✅ **Coloreo de filas** - Azul para masculino, naranja para femenino *(Bonus)*
-- ✅ **Subida de fotos** - Integración con Cloudinary para almacenamiento de imágenes
-- ✅ **Validaciones robustas** - Campos requeridos, documento único, formatos
+- **Listado de trabajadores** - Visualización de todos los registros con procedimiento almacenado
+- **Registro de trabajador** - Creación mediante modal con validaciones
+- **Edición de trabajador** - Actualización de datos mediante modal
+- **Eliminación de trabajador** - Con mensaje de confirmación requerido
+- **Filtro por sexo** - Filtrado por Masculino/Femenino *(Bonus)*
+- **Coloreo de filas** - Azul para masculino, naranja para femenino *(Bonus)*
+- **Subida de fotos** - Integración con Cloudinary para almacenamiento de imágenes
+- **Validaciones robustas** - Campos requeridos, documento único, formatos
 
 ---
 
-## 🏗️ Arquitectura del Proyecto
+## Arquitectura del Proyecto
 
 El proyecto sigue una **Arquitectura Limpia (Clean Architecture)** con separación en capas:
 
@@ -40,7 +40,7 @@ GestiónTrabajadores/
     └── QA/                                 # Documentación de QA y evidencias
 ```
 
-### 🛠️ Tecnologías Utilizadas
+### Tecnologías Utilizadas
 
 | Capa | Tecnología |
 |------|------------|
@@ -51,7 +51,7 @@ GestiónTrabajadores/
 | Testing | xUnit, Moq, FluentAssertions |
 | Almacenamiento de Imágenes | Cloudinary |
 
-### 📐 Patrones Aplicados
+### Patrones Aplicados
 
 - Repository Pattern
 - Dependency Injection
@@ -60,51 +60,51 @@ GestiónTrabajadores/
 
 ---
 
-## 📦 Entregables
+## Entregables
 
-### 1. 🎨 Prototipo de Interfaz (Figma)
+### 1. Prototipo de Interfaz (Figma)
 
 Diseño visual de las pantallas del módulo incluyendo listado, registro, edición y eliminación.
 
-🔗 **[Ver Prototipo en Figma](https://www.figma.com/design/2g5Tbn9BawEM8LGn1Fyslr/Prueba-T%C3%A9cnica---Myper?node-id=19-113&t=w0X5FntL4wwFd8es-1)**
+**[Ver Prototipo en Figma](https://www.figma.com/design/2g5Tbn9BawEM8LGn1Fyslr/Prueba-T%C3%A9cnica---Myper?node-id=19-113&t=w0X5FntL4wwFd8es-1)**
 
 ---
 
-### 2. 💾 Repositorio de Código (GitHub)
+### 2. Repositorio de Código (GitHub)
 
 Código fuente completo del proyecto con commits descriptivos.
 
-🔗 **[Ver Repositorio en GitHub](https://github.com/UsuarioCardenas/GestionTrabajadores)**
+**[Ver Repositorio en GitHub](https://github.com/UsuarioCardenas/GestionTrabajadores)**
 
 ---
 
-### 3. 🗃️ Script de Base de Datos
+### 3. Script de Base de Datos
 
 Script SQL para crear la base de datos `TrabajadoresPrueba` con tablas y procedimientos almacenados.
 
-🔗 **[Ver Script SQL](https://github.com/UsuarioCardenas/GestionTrabajadores/blob/main/src/Backend/Database/Scripts/01_CreateDatabase.sql)**
+**[Ver Script SQL](https://github.com/UsuarioCardenas/GestionTrabajadores/blob/main/src/Backend/Database/Scripts/01_CreateDatabase.sql)**
 
 ---
 
-### 4. 📝 Documentación de QA
+### 4. Documentación de QA
 
 Documento completo de validación y pruebas con casos de prueba funcionales, pruebas unitarias, pruebas de integración y evidencias visuales.
 
-🔗 **[Ver Documento de QA](./docs/QA/Documento_QA_ModuloTrabajadores.md)**
+**[Ver Documento de QA](./docs/QA/Documento_QA_ModuloTrabajadores.md)**
 
-📁 **[Ver Evidencias Visuales](./docs/QA/evidencias/)**
+**[Ver Evidencias Visuales](./docs/QA/evidencias/)**
 
 ---
 
-### 5. 🎥 Video de Presentación (Loom)
+### 5. Video de Presentación (Loom)
 
 Explicación técnica del proyecto, arquitectura, decisiones de desarrollo y demostración de la aplicación funcionando.
 
-🔗 **[Ver Video en Loom](#)** *(Pendiente de agregar enlace)*
+**[Ver Video en Loom](#)** *(Pendiente de agregar enlace)*
 
 ---
 
-## 🚀 Cómo Ejecutar el Proyecto
+## Cómo Ejecutar el Proyecto
 
 ### Prerrequisitos
 
@@ -163,8 +163,8 @@ Explicación técnica del proyecto, arquitectura, decisiones de desarrollo y dem
 
 ---
 
-## 👤 Autor
+## Autor
 
 **Diego Alessandro Cardenas Garcia**
 
-📅 Junio 2025
+Junio 2025
