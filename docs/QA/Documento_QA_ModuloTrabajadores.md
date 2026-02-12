@@ -953,14 +953,6 @@ El **Módulo de Gestión de Trabajadores** ha superado satisfactoriamente todas la
 3. **UI responsiva**: Implementada con Bootstrap
 4. **Mensajes de usuario**: Claros y descriptivos
 
-### 8.4 Posibles Mejoras Futuras
-
-- Implementar paginación en el listado para grandes volúmenes de datos
-- Agregar búsqueda por nombre/documento
-- Exportar listado a Excel/PDF
-- Implementar auditoría de cambios
-- Agregar más pruebas de carga/rendimiento
-
 ---
 
 **Documento elaborado por:** Diego Alessandro Cardenas Garcia  
