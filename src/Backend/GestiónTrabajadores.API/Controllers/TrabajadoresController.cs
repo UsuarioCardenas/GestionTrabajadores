@@ -25,9 +25,11 @@ public class TrabajadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<IEnumerable<TrabajadorDto>>> GetAll()
     {
+        _logger.LogInformation("Obteniendo todos los trabajadores");
         try
         {
             var trabajadores = await _trabajadorService.GetAllAsync();
+            _logger.LogInformation("Se obtuvieron {Count} trabajadores", trabajadores.Count());
             return Ok(new
             {
                 success = true,
@@ -53,12 +55,14 @@ public class TrabajadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TrabajadorDto>> GetById(int id)
     {
+        _logger.LogInformation("Obteniendo trabajador con ID: {Id}", id);
         try
         {
             var trabajador = await _trabajadorService.GetByIdAsync(id);
 
             if (trabajador == null)
             {
+                _logger.LogWarning("Trabajador no encontrado con ID: {Id}", id);
                 return NotFound(new
                 {
                     success = false,
@@ -66,15 +70,16 @@ public class TrabajadoresController : ControllerBase
                 });
             }
 
-            return Ok(new
+            _logger.LogInformation("Trabajador encontrado con ID: {Id}", id);
+                return Ok(new
+                {
+                    success = true,
+                    data = trabajador
+                });
+            }
+            catch (Exception ex)
             {
-                success = true,
-                data = trabajador
-            });
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error al obtener el trabajador con ID {Id}", id);
+                _logger.LogError(ex, "Error al obtener el trabajador con ID {Id}", id);
             return StatusCode(500, new
             {
                 success = false,
@@ -90,9 +95,11 @@ public class TrabajadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TrabajadorDto>> Create([FromBody] CreateTrabajadorDto createDto)
     {
+        _logger.LogInformation("Creando nuevo trabajador");
         try
         {
             var trabajador = await _trabajadorService.CreateAsync(createDto);
+            _logger.LogInformation("Trabajador creado exitosamente con ID: {Id}", trabajador.IdTrabajador);
 
             return CreatedAtAction(
                 nameof(GetById),
@@ -106,6 +113,7 @@ public class TrabajadoresController : ControllerBase
         }
         catch (ValidationException ex)
         {
+            _logger.LogWarning("Error de validación al crear trabajador: {Message}", ex.Message);
             return BadRequest(new
             {
                 success = false,
@@ -115,6 +123,7 @@ public class TrabajadoresController : ControllerBase
         }
         catch (InvalidOperationException ex)
         {
+            _logger.LogWarning("Operación inválida al crear trabajador: {Message}", ex.Message);
             return BadRequest(new
             {
                 success = false,
@@ -140,10 +149,12 @@ public class TrabajadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult<TrabajadorDto>> Update(int id, [FromBody] UpdateTrabajadorDto updateDto)
     {
+        _logger.LogInformation("Actualizando trabajador con ID: {Id}", id);
         try
         {
             if (id != updateDto.IdTrabajador)
             {
+                _logger.LogWarning("ID de URL {UrlId} no coincide con ID del cuerpo {BodyId}", id, updateDto.IdTrabajador);
                 return BadRequest(new
                 {
                     success = false,
@@ -152,33 +163,37 @@ public class TrabajadoresController : ControllerBase
             }
 
             var trabajador = await _trabajadorService.UpdateAsync(updateDto);
+                _logger.LogInformation("Trabajador actualizado exitosamente con ID: {Id}", id);
 
-            return Ok(new
+                return Ok(new
+                {
+                    success = true,
+                    message = "Trabajador actualizado exitosamente",
+                    data = trabajador
+                });
+            }
+            catch (ValidationException ex)
             {
-                success = true,
-                message = "Trabajador actualizado exitosamente",
-                data = trabajador
-            });
-        }
-        catch (ValidationException ex)
-        {
-            return BadRequest(new
+                _logger.LogWarning("Error de validación al actualizar trabajador {Id}: {Message}", id, ex.Message);
+                return BadRequest(new
+                {
+                    success = false,
+                    message = "Error de validación",
+                    errors = ex.Message
+                });
+            }
+            catch (KeyNotFoundException ex)
             {
-                success = false,
-                message = "Error de validación",
-                errors = ex.Message
-            });
-        }
-        catch (KeyNotFoundException ex)
+                _logger.LogWarning("Trabajador no encontrado para actualizar con ID: {Id}", id);
+                return NotFound(new
+                {
+                    success = false,
+                    message = ex.Message
+                });
+            }
+            catch (InvalidOperationException ex)
         {
-            return NotFound(new
-            {
-                success = false,
-                message = ex.Message
-            });
-        }
-        catch (InvalidOperationException ex)
-        {
+            _logger.LogWarning("Operación inválida al actualizar trabajador {Id}: {Message}", id, ex.Message);
             return BadRequest(new
             {
                 success = false,
@@ -203,9 +218,11 @@ public class TrabajadoresController : ControllerBase
     [ProducesResponseType(StatusCodes.Status500InternalServerError)]
     public async Task<ActionResult> Delete(int id)
     {
+        _logger.LogInformation("Eliminando trabajador con ID: {Id}", id);
         try
         {
             await _trabajadorService.DeleteAsync(id);
+            _logger.LogInformation("Trabajador eliminado exitosamente con ID: {Id}", id);
 
             return Ok(new
             {
@@ -215,6 +232,7 @@ public class TrabajadoresController : ControllerBase
         }
         catch (KeyNotFoundException ex)
         {
+            _logger.LogWarning("Trabajador no encontrado para eliminar con ID: {Id}", id);
             return NotFound(new
             {
                 success = false,

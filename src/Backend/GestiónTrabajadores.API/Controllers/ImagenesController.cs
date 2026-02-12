@@ -8,10 +8,12 @@ namespace GestiónTrabajadores.API.Controllers;
 public class ImagenesController : ControllerBase
 {
     private readonly ICloudinaryService _cloudinaryService;
+    private readonly ILogger<ImagenesController> _logger;
 
-    public ImagenesController(ICloudinaryService cloudinaryService)
+    public ImagenesController(ICloudinaryService cloudinaryService, ILogger<ImagenesController> logger)
     {
         _cloudinaryService = cloudinaryService;
+        _logger = logger;
     }
 
     [HttpPost("upload")]
@@ -19,8 +21,10 @@ public class ImagenesController : ControllerBase
     [RequestFormLimits(MultipartBodyLengthLimit = 10 * 1024 * 1024)]
     public async Task<ActionResult<ImageUploadResponse>> UploadImage(IFormFile file)
     {
+        _logger.LogInformation("Iniciando subida de imagen");
         if (file == null || file.Length == 0)
         {
+            _logger.LogWarning("Intento de subida sin archivo");
             return BadRequest(new { error = "No se ha proporcionado ningún archivo" });
         }
 
@@ -29,11 +33,13 @@ public class ImagenesController : ControllerBase
 
         if (!allowedExtensions.Contains(extension))
         {
+            _logger.LogWarning("Extensión de archivo no permitida: {Extension}", extension);
             return BadRequest(new { error = "Solo se permiten archivos JPG, JPEG o PNG" });
         }
 
         if (file.Length > 5 * 1024 * 1024)
         {
+            _logger.LogWarning("Archivo excede el tamaño máximo: {Size} bytes", file.Length);
             return BadRequest(new { error = "El archivo no puede superar los 5MB" });
         }
 
@@ -41,10 +47,12 @@ public class ImagenesController : ControllerBase
         {
             using var stream = file.OpenReadStream();
             var imageUrl = await _cloudinaryService.UploadImageAsync(stream, file.FileName);
+            _logger.LogInformation("Imagen subida exitosamente: {FileName}", file.FileName);
             return Ok(new ImageUploadResponse { Url = imageUrl });
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Error al subir la imagen: {FileName}", file.FileName);
             return StatusCode(500, new { error = $"Error al subir la imagen: {ex.Message}" });
         }
     }
@@ -52,19 +60,23 @@ public class ImagenesController : ControllerBase
     [HttpDelete("{publicId}")]
     public async Task<ActionResult> DeleteImage(string publicId)
     {
+        _logger.LogInformation("Iniciando eliminación de imagen con PublicId: {PublicId}", publicId);
         try
         {
             var result = await _cloudinaryService.DeleteImageAsync(publicId);
 
             if (result)
             {
+                _logger.LogInformation("Imagen eliminada exitosamente: {PublicId}", publicId);
                 return Ok(new { message = "Imagen eliminada correctamente" });
             }
 
+            _logger.LogWarning("Imagen no encontrada: {PublicId}", publicId);
             return NotFound(new { error = "No se encontró la imagen" });
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Error al eliminar la imagen: {PublicId}", publicId);
             return StatusCode(500, new { error = $"Error al eliminar la imagen: {ex.Message}" });
         }
     }

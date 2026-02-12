@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Nuevo perfil",
+    "Projects": [
+      {
+        "Path": "src\\Backend\\GestiónTrabajadores.API\\GestiónTrabajadores.API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "src\\Frontend\\GestiónTrabajadores.Web\\GestiónTrabajadores.Web.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

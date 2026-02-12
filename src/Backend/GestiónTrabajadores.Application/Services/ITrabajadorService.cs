@@ -44,7 +44,7 @@ public class TrabajadorService : ITrabajadorService
         if (!validationResult.IsValid)
         {
             var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            throw new ValidationException(errors);
+            throw new System.ComponentModel.DataAnnotations.ValidationException(errors);
         }
 
         if (await _repository.ExistsByDocumentoAsync(createDto.NumeroDocumento))
@@ -62,7 +62,7 @@ public class TrabajadorService : ITrabajadorService
         if (!validationResult.IsValid)
         {
             var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            throw new ValidationException(errors);
+            throw new System.ComponentModel.DataAnnotations.ValidationException(errors);
         }
 
         var existing = await _repository.GetByIdAsync(updateDto.IdTrabajador);
