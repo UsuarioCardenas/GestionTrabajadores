@@ -82,7 +82,7 @@ Código fuente completo del proyecto con commits descriptivos.
 
 Script SQL para crear la base de datos `TrabajadoresPrueba` con tablas y procedimientos almacenados.
 
-🔗 **[Ver Script SQL](./database/script.sql)**
+🔗 **[Ver Script SQL](https://github.com/UsuarioCardenas/GestionTrabajadores/blob/main/src/Backend/Database/Scripts/01_CreateDatabase.sql)**
 
 ---
 
@@ -121,10 +121,34 @@ Explicación técnica del proyecto, arquitectura, decisiones de desarrollo y dem
 
 2. **Ejecutar el script de base de datos**
    - Abrir SQL Server Management Studio
-   - Ejecutar el archivo `database/script.sql`
+   - Ejecutar el script desde `src/Backend/Database/Scripts/01_CreateDatabase.sql`
 
-3. **Configurar la cadena de conexión**
-   - Actualizar `appsettings.json` en el proyecto API con tu conexión a SQL Server
+3. **Configurar los archivos de configuración**
+
+   El proyecto incluye archivos de ejemplo `appsetting.example.json`. Para configurar:
+
+   - Renombrar `appsetting.example.json` a `appsettings.json`
+   - Completar con tus credenciales:
+
+   ```json
+   {
+     "ConnectionStrings": {
+       "TrabajadoresConnection": "Server=TU_SERVIDOR;Database=TrabajadoresPrueba;Trusted_Connection=True;TrustServerCertificate=True;"
+     },
+     "Cloudinary": {
+       "CloudName": "TU_CLOUD_NAME",
+       "ApiKey": "TU_API_KEY",
+       "ApiSecret": "TU_API_SECRET"
+     },
+     "Logging": {
+       "LogLevel": {
+         "Default": "Information",
+         "Microsoft.AspNetCore": "Warning"
+       }
+     },
+     "AllowedHosts": "*"
+   }
+   ```
 
 4. **Ejecutar la aplicación**
    ```bash

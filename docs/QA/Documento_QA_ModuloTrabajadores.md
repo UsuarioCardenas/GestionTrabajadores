@@ -1,4 +1,4 @@
-# ?? Documento de Validación y QA
+# Documento de Validación y QA
 ## Módulo de Gestión de Trabajadores
 
 ---
@@ -886,16 +886,6 @@ Passed!  - Failed:     0, Passed:     9, Skipped:     0, Total:     9
 | UI/Visual | Caso 005 | - | - |
 | Búsqueda por ID | - | UT-003, UT-004 | IT-002 |
 | CRUD Completo | - | - | IT-009 |
-
-### 6.3 Estado de Validaciones
-
-| Validación | Implementada | Probada |
-|------------|--------------|---------|
-| Campos requeridos | ? | ? |
-| Documento único | ? | ? |
-| Formato de fecha | ? | ? |
-| Sexo válido (M/F) | ? | ? |
-| Tipo documento válido | ? | ? |
 
 ---
 
