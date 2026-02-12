@@ -3,7 +3,6 @@ using FluentValidation;
 using GestiónTrabajadores.Application.DTOs;
 using GestiónTrabajadores.Application.Interfaces;
 using GestiónTrabajadores.Domain.Entities;
-using System.ComponentModel.DataAnnotations;
 
 namespace GestiónTrabajadores.Application.Services;
 
@@ -43,8 +42,7 @@ public class TrabajadorService : ITrabajadorService
         var validationResult = await _createValidator.ValidateAsync(createDto);
         if (!validationResult.IsValid)
         {
-            var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            throw new System.ComponentModel.DataAnnotations.ValidationException(errors);
+            throw new ValidationException(validationResult.Errors);
         }
 
         if (await _repository.ExistsByDocumentoAsync(createDto.NumeroDocumento))
@@ -61,8 +59,7 @@ public class TrabajadorService : ITrabajadorService
         var validationResult = await _updateValidator.ValidateAsync(updateDto);
         if (!validationResult.IsValid)
         {
-            var errors = string.Join(", ", validationResult.Errors.Select(e => e.ErrorMessage));
-            throw new System.ComponentModel.DataAnnotations.ValidationException(errors);
+            throw new ValidationException(validationResult.Errors);
         }
 
         var existing = await _repository.GetByIdAsync(updateDto.IdTrabajador);

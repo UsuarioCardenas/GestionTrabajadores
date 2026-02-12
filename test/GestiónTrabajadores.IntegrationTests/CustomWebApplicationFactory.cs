@@ -6,10 +6,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Moq;
+
 namespace GestiónTrabajadores.IntegrationTests;
 
 public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProgram> where TProgram : class
 {
+    private readonly string _databaseName = $"TestDatabase_{Guid.NewGuid()}";
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureServices(services =>
@@ -30,10 +33,13 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
             mockCloudinary.Setup(c => c.UploadImageAsync(It.IsAny<Stream>(), It.IsAny<string>()))
                 .ReturnsAsync("https://test-image-url.com/test.jpg");
             services.AddScoped(_ => mockCloudinary.Object);
+
+            // Usar el mismo nombre de base de datos para toda la instancia del factory
             services.AddDbContext<TrabajadoresDbContext>(options =>
             {
-                options.UseInMemoryDatabase("TestDatabase_" + Guid.NewGuid().ToString());
+                options.UseInMemoryDatabase(_databaseName);
             });
+
             var sp = services.BuildServiceProvider();
             using (var scope = sp.CreateScope())
             {
@@ -41,7 +47,7 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
                 var db = scopedServices.GetRequiredService<TrabajadoresDbContext>();
                 var logger = scopedServices.GetRequiredService<ILogger<CustomWebApplicationFactory<TProgram>>>();
                 db.Database.EnsureCreated();
-                logger.LogInformation("Base de datos de prueba creada exitosamente");
+                logger.LogInformation("Base de datos de prueba creada exitosamente: {DatabaseName}", _databaseName);
             }
         });
         builder.UseEnvironment("Testing");

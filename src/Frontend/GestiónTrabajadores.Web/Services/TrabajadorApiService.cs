@@ -115,8 +115,16 @@ public class TrabajadorApiService : ITrabajadorApiService
 
     private class ApiResponse<T>
     {
+        [System.Text.Json.Serialization.JsonPropertyName("success")]
         public bool Success { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("data")]
         public T Data { get; set; } = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("message")]
         public string? Message { get; set; }
+
+        [System.Text.Json.Serialization.JsonPropertyName("total")]
+        public int Total { get; set; }
     }
 }

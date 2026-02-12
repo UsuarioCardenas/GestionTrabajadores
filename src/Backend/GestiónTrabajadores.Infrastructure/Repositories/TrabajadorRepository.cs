@@ -18,6 +18,10 @@ public class TrabajadorRepository : ITrabajadorRepository
 
     public async Task<IEnumerable<Trabajador>> GetAllAsync()
     {
+        if (_context.Database.ProviderName == "Microsoft.EntityFrameworkCore.InMemory")
+        {
+            return await _context.Trabajadores.ToListAsync();
+        }
         var trabajadores = new List<Trabajador>();
 
         var connectionString = _context.Database.GetConnectionString();

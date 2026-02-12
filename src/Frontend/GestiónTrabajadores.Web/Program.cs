@@ -9,12 +9,12 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddHttpClient<ITrabajadorApiService, TrabajadorApiService>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7299");
+    client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7089");
 });
 builder.Services.AddHttpClient<IImagenApiService, ImagenApiService>()
     .ConfigureHttpClient(client =>
     {
-        client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7299");
+        client.BaseAddress = new Uri(builder.Configuration["ApiSettings:BaseUrl"] ?? "https://localhost:7089");
         client.Timeout = TimeSpan.FromMinutes(2);
     });
 builder.Services.AddMudServices();
